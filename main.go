@@ -1,15 +1,32 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 	"log"
 	"net/http"
 	"os"
 )
 
+type Employee struct {
+	Employeeid string `json:"employeeid"`
+	Firstname  string `json:"firstname"`
+	Lastname   string `json:"lastname"`
+	Divisionid string `json:"divisionid"`
+}
+
+var employees []Employee
+
+func getAllEmployees(w http.ResponseWriter, r *http.Request) {
+	employees = append(employees, Employee{Employeeid: "1", Firstname: "John", Lastname: "Doe", Divisionid: "1"})
+	employees = append(employees, Employee{Employeeid: "2", Firstname: "Smith", Lastname: "Taylor", Divisionid: "2"})
+	fmt.Println("Endopoint Hi: All Employees Endpoint")
+	json.NewEncoder(w).Encode(employees)
+}
+
 func main() {
-	log.Print("starting server...")
 	http.HandleFunc("/", handler)
+	http.HandleFunc("/allEmployees", getAllEmployees)
 
 	// Determine port for HTTP service.
 	port := os.Getenv("PORT")
