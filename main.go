@@ -42,9 +42,11 @@ func main() {
 			"GET",
 			"OPTIONS",
 		},
-		// AllowHeaders: []string{
-		// 	"Content-Type",
-		// },
+		AllowHeaders: []string{
+			"Content-Type",
+			"Access-Control-Allow-Headers",
+			"Authorization",
+		},
 		AllowCredentials: false,
 		MaxAge:           24 * time.Hour,
 	}))
