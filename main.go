@@ -23,11 +23,13 @@ var employees []Employee
 func getAllEmployees(w http.ResponseWriter, r *http.Request) {
 	employees = append(employees, Employee{Employeeid: "1", Firstname: "John", Lastname: "Doe", Divisionid: "1"})
 	employees = append(employees, Employee{Employeeid: "2", Firstname: "Smith", Lastname: "Taylor", Divisionid: "2"})
-	fmt.Println("Endopoint Hi: All Employees Endpoint")
+	fmt.Println("Endopoint Hit: All Employees Endpoint")
 	json.NewEncoder(w).Encode(employees)
 }
 
 func main() {
+
+	log.Printf("starting HTTP")
 
 	r := gin.Default()
 
