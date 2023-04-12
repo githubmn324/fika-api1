@@ -40,9 +40,9 @@ func main() {
 			"GET",
 			"OPTIONS",
 		},
-		AllowHeaders: []string{
-			"Content-Type",
-		},
+		// AllowHeaders: []string{
+		// 	"Content-Type",
+		// },
 		AllowCredentials: false,
 		MaxAge:           24 * time.Hour,
 	}))
