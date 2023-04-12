@@ -30,6 +30,7 @@ func getAllEmployees(w http.ResponseWriter, r *http.Request) {
 func main() {
 
 	r := gin.Default()
+
 	r.Use(cors.New(cors.Config{
 		AllowOrigins: []string{
 			"http://localhost",
