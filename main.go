@@ -48,13 +48,13 @@ func main() {
 			"Access-Control-Allow-Headers",
 			"Authorization",
 		},
-		AllowCredentials: false,
+		AllowCredentials: true,
 		MaxAge:           24 * time.Hour,
 	}))
 
 	r.GET("/", func(c *gin.Context) {
 		c.JSON(http.StatusOK, gin.H{
-			"message": "hellowww",
+			"message": "hello I'm Cloud Run API 1!",
 			"headers": c.GetHeader("Token"),
 		})
 	})
