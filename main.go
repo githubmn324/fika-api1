@@ -57,6 +57,7 @@ func main() {
 		log.Fatal(err)
 	}
 
+	// コメントアウト
 	// http.HandleFunc("/", handler)
 	// http.HandleFunc("/allEmployees", getAllEmployees)
 
