@@ -59,7 +59,7 @@ func main() {
 		c.Header("Access-Control-Allow-Origin", "*")
 		c.Header("Access-Control-Allow-Credentials", "true")
 		c.Header("Authorization", c.GetHeader("Authorization"))
-		c.JSON(http.StatusOK, gin.H{
+		c.JSON(204, gin.H{
 			"message":              "hello I'm Cloud Run API 1!",
 			"authorizationHeaders": c.GetHeader("Authorization"),
 		})
