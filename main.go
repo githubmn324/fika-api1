@@ -56,8 +56,6 @@ func main() {
 	}))
 
 	r.GET("/", func(c *gin.Context) {
-		c.Header("Access-Control-Allow-Origin", "http://localhost:3000")
-		c.Header("Access-Control-Allow-Credentials", "true")
 		c.JSON(http.StatusOK, gin.H{
 			"message":              "hello I'm Cloud Run API 1!",
 			"authorizationHeaders": c.GetHeader("Authorization"),
@@ -65,6 +63,8 @@ func main() {
 	})
 
 	r.OPTIONS("/", func(c *gin.Context) {
+		c.Header("Access-Control-Allow-Origin", "http://localhost:3000")
+		c.Header("Access-Control-Allow-Credentials", "true")
 		c.JSON(http.StatusOK, gin.H{
 			"message":              "hello I'm Cloud Run API 1!",
 			"authorizationHeaders": c.GetHeader("Authorization"),
