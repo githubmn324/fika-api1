@@ -62,6 +62,13 @@ func main() {
 		})
 	})
 
+	r.OPTIONS("/", func(c *gin.Context) {
+		c.JSON(http.StatusOK, gin.H{
+			"message":              "hello I'm Cloud Run API 1!",
+			"authorizationHeaders": c.GetHeader("Authorization"),
+		})
+	})
+
 	if err := r.Run(":8080"); err != nil {
 		log.Fatal(err)
 	}
