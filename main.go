@@ -56,6 +56,7 @@ func main() {
 	}))
 
 	r.OPTIONS("/", func(c *gin.Context) {
+		c.Header("Access-Control-Expose-Headers", "*")
 		c.Header("Access-Control-Allow-Origin", "*")
 		c.Header("Access-Control-Allow-Credentials", "true")
 		c.Header("Authorization", c.GetHeader("Authorization"))
@@ -66,6 +67,7 @@ func main() {
 	})
 
 	r.GET("/", func(c *gin.Context) {
+		c.Header("Access-Control-Expose-Headers", "*")
 		c.Header("Access-Control-Allow-Origin", "*")
 		c.JSON(http.StatusOK, gin.H{
 			"message":              "hello I'm Cloud Run API 1!",
