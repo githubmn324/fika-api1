@@ -44,11 +44,13 @@ func main() {
 			"OPTIONS",
 		},
 		AllowHeaders: []string{
+			"Access-Control-Allow-Origin",
 			"Access-Control-Allow-Headers",
 			"Origin",
 			"X-Requested-With",
 			"Authorization",
 			"Accept",
+			"Accept-Encoding",
 			"Access-Control-Allow-Credentials",
 		},
 		AllowCredentials: true,
