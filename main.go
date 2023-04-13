@@ -35,8 +35,7 @@ func main() {
 
 	r.Use(cors.New(cors.Config{
 		AllowOrigins: []string{
-			"http://localhost",
-			"*",
+			"http://localhost:3000",
 		},
 		AllowMethods: []string{
 			"POST",
@@ -44,7 +43,6 @@ func main() {
 			"OPTIONS",
 		},
 		AllowHeaders: []string{
-			"Access-Control-Allow-Origin",
 			"Access-Control-Allow-Headers",
 			"Origin",
 			"X-Requested-With",
