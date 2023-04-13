@@ -55,16 +55,17 @@ func main() {
 		MaxAge:           24 * time.Hour,
 	}))
 
-	r.GET("/", func(c *gin.Context) {
+	r.OPTIONS("/", func(c *gin.Context) {
+		c.Header("Access-Control-Allow-Origin", "http://localhost:3000")
+		c.Header("Access-Control-Allow-Credentials", "true")
+		c.Header("Authorization", c.GetHeader("Authorization"))
 		c.JSON(http.StatusOK, gin.H{
 			"message":              "hello I'm Cloud Run API 1!",
 			"authorizationHeaders": c.GetHeader("Authorization"),
 		})
 	})
 
-	r.OPTIONS("/", func(c *gin.Context) {
-		c.Header("Access-Control-Allow-Origin", "http://localhost:3000")
-		c.Header("Access-Control-Allow-Credentials", "true")
+	r.GET("/", func(c *gin.Context) {
 		c.JSON(http.StatusOK, gin.H{
 			"message":              "hello I'm Cloud Run API 1!",
 			"authorizationHeaders": c.GetHeader("Authorization"),
