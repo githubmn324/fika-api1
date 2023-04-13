@@ -45,7 +45,10 @@ func main() {
 		},
 		AllowHeaders: []string{
 			"Access-Control-Allow-Headers",
+			"Origin",
+			"X-Requested-With",
 			"Authorization",
+			"Accept",
 			"Access-Control-Allow-Credentials",
 		},
 		AllowCredentials: true,
