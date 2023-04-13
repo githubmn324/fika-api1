@@ -44,9 +44,9 @@ func main() {
 			"OPTIONS",
 		},
 		AllowHeaders: []string{
-			"Content-Type",
 			"Access-Control-Allow-Headers",
 			"Authorization",
+			"Access-Control-Allow-Credentials",
 		},
 		AllowCredentials: true,
 		MaxAge:           24 * time.Hour,
