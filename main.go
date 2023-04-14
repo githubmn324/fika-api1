@@ -79,7 +79,7 @@ func main() {
 		c.JSON(http.StatusOK, gin.H{
 			"message": "hello I'm Cloud Run API 1!",
 			// "authorizationHeaders": c.GetHeader("Authorization"),
-			"requstHeader": requestDump,
+			"requstHeader": string(requestDump),
 		})
 	})
 
