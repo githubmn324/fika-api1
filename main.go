@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"net/http/httputil"
 	"time"
 
 	"github.com/gin-contrib/cors"
@@ -35,7 +36,10 @@ func main() {
 
 	r.Use(cors.New(cors.Config{
 		AllowOrigins: []string{
-			"*",
+			"http://localhost:3000",
+			"http://172.20.10.3:3000",
+			"https://localhost:3000",
+			"https://172.20.10.3:3000",
 		},
 		AllowMethods: []string{
 			"POST",
@@ -59,7 +63,6 @@ func main() {
 		c.Header("Access-Control-Expose-Headers", "*")
 		c.Header("Access-Control-Allow-Origin", "*")
 		c.Header("Access-Control-Allow-Credentials", "true")
-		c.Header("Authorization", c.GetHeader("Authorization"))
 		c.JSON(204, gin.H{
 			"message":              "hello I'm Cloud Run API 1!",
 			"authorizationHeaders": c.GetHeader("Authorization"),
@@ -69,9 +72,14 @@ func main() {
 	r.GET("/", func(c *gin.Context) {
 		c.Header("Access-Control-Expose-Headers", "*")
 		c.Header("Access-Control-Allow-Origin", "*")
+		requestDump, err := httputil.DumpRequest(c.Request, true)
+		if err != nil {
+			fmt.Println(err)
+		}
 		c.JSON(http.StatusOK, gin.H{
-			"message":              "hello I'm Cloud Run API 1!",
-			"authorizationHeaders": c.GetHeader("Authorization"),
+			"message": "hello I'm Cloud Run API 1!",
+			// "authorizationHeaders": c.GetHeader("Authorization"),
+			"requstHeader": requestDump,
 		})
 	})
 
