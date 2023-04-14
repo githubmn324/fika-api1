@@ -6,9 +6,7 @@ import (
 	"log"
 	"net/http"
 	"net/http/httputil"
-	"time"
 
-	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 )
 
@@ -34,51 +32,50 @@ func main() {
 
 	r := gin.Default()
 
-	r.Use(cors.New(cors.Config{
-		AllowOrigins: []string{
-			"http://localhost:3000",
-			"http://172.20.10.3:3000",
-			"https://localhost:3000",
-			"https://172.20.10.3:3000",
-		},
-		AllowMethods: []string{
-			"POST",
-			"GET",
-			"OPTIONS",
-		},
-		AllowHeaders: []string{
-			"Access-Control-Allow-Headers",
-			"Origin",
-			"X-Requested-With",
-			"Authorization",
-			"Accept",
-			"Accept-Encoding",
-			"Access-Control-Allow-Credentials",
-		},
-		AllowCredentials: true,
-		MaxAge:           24 * time.Hour,
-	}))
+	// r.Use(cors.New(cors.Config{
+	// 	AllowOrigins: []string{
+	// 		"http://localhost:3000",
+	// 		"http://172.20.10.3:3000",
+	// 		"https://localhost:3000",
+	// 		"https://172.20.10.3:3000",
+	// 	},
+	// 	AllowMethods: []string{
+	// 		"POST",
+	// 		"GET",
+	// 		"OPTIONS",
+	// 	},
+	// 	AllowHeaders: []string{
+	// 		"Access-Control-Allow-Headers",
+	// 		"Origin",
+	// 		"X-Requested-With",
+	// 		"Authorization",
+	// 		"Accept",
+	// 		"Accept-Encoding",
+	// 		"Access-Control-Allow-Credentials",
+	// 	},
+	// 	AllowCredentials: true,
+	// 	MaxAge:           24 * time.Hour,
+	// }))
 
-	r.OPTIONS("/", func(c *gin.Context) {
-		c.Header("Access-Control-Expose-Headers", "*")
-		c.Header("Access-Control-Allow-Origin", "*")
-		c.Header("Access-Control-Allow-Credentials", "true")
-		c.JSON(204, gin.H{
-			"message":              "hello I'm Cloud Run API 1!",
-			"authorizationHeaders": c.GetHeader("Authorization"),
-		})
-	})
+	// r.OPTIONS("/", func(c *gin.Context) {
+	// 	c.Header("Access-Control-Expose-Headers", "*")
+	// 	c.Header("Access-Control-Allow-Origin", "*")
+	// 	c.Header("Access-Control-Allow-Credentials", "true")
+	// 	c.JSON(204, gin.H{
+	// 		"message":              "hello I'm Cloud Run API 1!",
+	// 		"authorizationHeaders": c.GetHeader("Authorization"),
+	// 	})
+	// })
 
 	r.GET("/", func(c *gin.Context) {
-		c.Header("Access-Control-Expose-Headers", "*")
-		c.Header("Access-Control-Allow-Origin", "*")
+		// c.Header("Access-Control-Expose-Headers", "*")
+		// c.Header("Access-Control-Allow-Origin", "*")
 		requestDump, err := httputil.DumpRequest(c.Request, true)
 		if err != nil {
 			fmt.Println(err)
 		}
 		c.JSON(http.StatusOK, gin.H{
-			"message": "hello I'm Cloud Run API 1!",
-			// "authorizationHeaders": c.GetHeader("Authorization"),
+			"message":      "hello I'm Cloud Run API 1!",
 			"requstHeader": string(requestDump),
 		})
 	})
